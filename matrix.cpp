@@ -6,6 +6,15 @@ using namespace std;
 class Matrix{
 public:
     std::vector<vector<string>> mtx;
+
+    void print(){
+        for (int i = 0; i < mtx.size(); ++i) {
+            for (int j = 0; j < mtx[i].size(); ++j) {
+                cout << mtx[i][j] << " ";
+            }
+        cout << endl;
+        } 
+    }
 };
 
 void load(string &inputfile, Matrix &mtx1, Matrix &mtx2){
@@ -40,7 +49,7 @@ void load(string &inputfile, Matrix &mtx1, Matrix &mtx2){
     }
 }
 
-void mtxadd(Matrix &mtx1, Matrix &mtx2){
+void mtxAdd(Matrix &mtx1, Matrix &mtx2){
     Matrix tempmtx;
     for (int i = 0; i < mtx1.mtx.size(); ++i) {
         vector<string> row;
@@ -52,36 +61,58 @@ void mtxadd(Matrix &mtx1, Matrix &mtx2){
         tempmtx.mtx.push_back(row);
     }
     cout << "Matrix 1 and Matrix 2 added together\n";
-    for (int i = 0; i < tempmtx.mtx.size(); ++i) {
-        for (int j = 0; j < tempmtx.mtx[i].size(); ++j) {
-            cout << tempmtx.mtx[i][j] << " ";
-        }
-        cout << endl;
-    }   
+    tempmtx.print(); 
 }
+
+void mtxMultiply(Matrix &mtx1, Matrix &mtx2){
+}
+
+void mtxDiagonalSum(Matrix &mtx1, Matrix &mtx2){
+}
+
+void mtxRowSwap(Matrix &mtxz){
+}
+
+void mtxColumnSwap(Matrix &mtxz){
+}
+
+void mtxUpdateRows(Matrix &mtxz){
+}
+
 
 int main(){
     Matrix mtx1;
     Matrix mtx2;
     string inputfile;
+    string selectedmtx;
     cout << "What is your input file name?: ";
     cin >> inputfile;
     load(inputfile, mtx1, mtx2);
 
     cout << "Vector 1\n";
-    for (int i = 0; i < mtx1.mtx.size(); ++i) {
-        for (int j = 0; j < mtx1.mtx[i].size(); ++j) {
-            cout << mtx1.mtx[i][j] << " ";
-        }
-        cout << endl;
-    }   
-    cout << "Vector 2\n";
-    for (int i = 0; i < mtx2.mtx.size(); ++i) {
-        for (int j = 0; j < mtx2.mtx[i].size(); ++j) {
-            cout << mtx2.mtx[i][j] << " ";
-        }
-        cout << endl;
-    } 
+    mtx1.print();
 
-    mtxadd(mtx1,mtx2);
+    cout << "Vector 2\n";
+    mtx2.print();
+
+    mtxAdd(mtx1,mtx2);
+    mtxMultiply(mtx1,mtx2);
+
+    cout << "Would you like to use mtx1 or mtx2 for the next operations?: ";
+    cin >> selectedmtx;
+    
+    if (selectedmtx == "mtx1"){
+        mtxRowSwap(mtx1);
+        mtxColumnSwap(mtx1);
+        mtxUpdateRows(mtx1);
+    }
+    else if (selectedmtx == "mtx2"){
+        mtxRowSwap(mtx2);
+        mtxColumnSwap(mtx2);
+        mtxUpdateRows(mtx2);
+    }
+    else{
+        cout << "You have entered an invalid matrix option";
+        return 0;
+    }
 }
