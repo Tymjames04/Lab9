@@ -70,13 +70,13 @@ void mtxMultiply(Matrix &mtx1, Matrix &mtx2){
 void mtxDiagonalSum(Matrix &mtx1, Matrix &mtx2){
 }
 
-void mtxRowSwap(Matrix &mtxz){
+void mtxRowSwap(Matrix &mtxz, int row1, int row2){
 }
 
-void mtxColumnSwap(Matrix &mtxz){
+void mtxColumnSwap(Matrix &mtxz, int col1, int col2){
 }
 
-void mtxUpdateRows(Matrix &mtxz){
+void mtxUpdateRows(Matrix &mtxz, int row, int column){
 }
 
 
