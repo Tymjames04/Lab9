@@ -106,9 +106,39 @@ void mtxRowSwap(Matrix &mtxz, int row1, int row2){
 }
 
 void mtxColSwap(Matrix &mtxz, int col1, int col2){
+    Matrix outputMtx;
+    for (int i = 0; i < mtxz.mtx.size(); i++) {
+        vector<string> row;
+        for (int j = 0; j < mtxz.mtx[i].size(); j++) {
+            if(j == col1){
+                row.push_back(mtxz.mtx[i][col2]);
+            }else if(j == col2){
+                row.push_back(mtxz.mtx[i][col1]);
+            }else{
+                row.push_back(mtxz.mtx[i][j]);
+            }
+        }
+        outputMtx.mtx.push_back(row);
+    }
+    cout << "Matrix with columns " << col1 << " and " << col2 << " swapped:\n";
+    outputMtx.print();    
 }
 
-void mtxUpdateRows(Matrix &mtxz, int row, int column){
+void mtxUpdateRows(Matrix &mtxz, int row, int col, int val){
+    Matrix outputMtx;
+    for (int i = 0; i < mtxz.mtx.size(); i++) {
+        vector<string> newrow;
+        for (int j = 0; j < mtxz.mtx[i].size(); j++) {
+            if(i == row && j == col){
+                newrow.push_back(to_string(val));
+            }else{
+                newrow.push_back(mtxz.mtx[i][j]);
+            }
+        }
+        outputMtx.mtx.push_back(newrow);
+    }
+    cout << "Matrix with row value at " << row << " and " << col << " swapped for " << val << " :\n";
+    outputMtx.print(); 
 }
 
 bool boundchecker(Matrix &mtxz, int b1, int b2){
@@ -122,16 +152,20 @@ int main(){
     cout << "What is your input file name?: ";
     cin >> inputfile;
     load(inputfile, mtx1, mtx2);
+
     //task1
+    cout << "\n-----Task1-----\n";
     cout << "Vector 1\n";
     mtx1.print();
     cout << "Vector 2\n";
     mtx2.print();
 
     //task2
+    cout << "\n-----Task2-----\n";
     mtxAdd(mtx1,mtx2);
 
     //task3
+    cout << "\n-----Task3-----\n";
     string task3mtx;
     cout << "What would you like the first factor matrix to be? \"matrix1\" or \"matrix2\": ";
     cin >> task3mtx;
@@ -145,6 +179,7 @@ int main(){
     }
 
     //task4
+    cout << "\n-----Task4-----\n";
     string task4mtx;
     cout << "Would you like to find the diagonal of \"matrix1\" or \"matrix2\"?: ";
     cin >> task4mtx;
@@ -158,6 +193,7 @@ int main(){
     }
 
     //task5
+    cout << "\n-----Task5-----\n";
     string task5mtx;
     int task5row1;
     int task5row2;
@@ -169,14 +205,17 @@ int main(){
     cin >> task5row2;
     if (task5mtx == "matrix1"){
         if (boundchecker(mtx1,task5row1,task5row2)) mtxRowSwap(mtx1,task5row1,task5row2);
+        else cout << "You have entered an invalid index";
     }else if (task5mtx == "matrix2"){
         if (boundchecker(mtx2,task5row1,task5row2)) mtxRowSwap(mtx2,task5row1,task5row2);
+        else cout << "You have entered an invalid index";
     }else{
         cout << "You have entered something invalid for task 5";
         return(1);
     } 
 
     //task6
+    cout << "\n-----Task6-----\n";
     string task6mtx;
     int task6col1;
     int task6col2;
@@ -188,12 +227,38 @@ int main(){
     cin >> task6col2;
     if (task6mtx == "matrix1"){
         if (boundchecker(mtx1,task6col1,task6col2)) mtxColSwap(mtx1,task6col1,task6col2);
+        else cout << "You have entered an invalid index";
     }else if (task6mtx == "matrix2"){
         if (boundchecker(mtx2,task6col1,task6col2)) mtxColSwap(mtx2,task6col1,task6col2);
+        else cout << "You have entered an invalid index";
     }else{
         cout << "You have entered something invalid for task 6";
         return(1);
     }
     
+    //task7
+    cout << "\n-----Task7-----\n";
+    string task7mtx;
+    int task7row;
+    int task7col;
+    int task7val;
+    cout << "Which matrix do you want to swap a value in? \"matrix1\" or \"matrix2\": ";
+    cin >> task7mtx;
+    cout << "What is the row you want to swap?: ";
+    cin >> task7row;
+    cout << "What is the column you want to swap?: ";
+    cin >> task7col;
+    cout << "What is the value to swap in?: ";
+    cin >> task7val;
+    if (task7mtx == "matrix1"){
+        if (boundchecker(mtx1,task7row,task7col)) mtxUpdateRows(mtx1,task7row,task7col,task7val);
+        else cout << "You have entered an invalid index";
+    }else if (task7mtx == "matrix2"){
+        if (boundchecker(mtx2,task7row,task7col)) mtxUpdateRows(mtx2,task7row,task7col,task7val);
+        else cout << "You have entered an invalid index";
+    }else{
+        cout << "You have entered something invalid for task 7";
+        return(1);
+    }
 
 }
