@@ -51,9 +51,9 @@ void load(string &inputfile, Matrix &mtx1, Matrix &mtx2){
 
 void mtxAdd(Matrix &mtx1, Matrix &mtx2){
     Matrix tempmtx;
-    for (int i = 0; i < mtx1.mtx.size(); ++i) {
+    for (int i = 0; i < mtx1.mtx.size(); i++) {
         vector<string> row;
-        for (int j = 0; j < mtx1.mtx[i].size(); ++j) {
+        for (int j = 0; j < mtx1.mtx[i].size(); j++) {
             int mtx1int = stoi(mtx1.mtx[i][j]);
             int mtx2int = stoi(mtx2.mtx[i][j]);
             row.push_back(to_string(mtx1int + mtx2int));
@@ -65,9 +65,35 @@ void mtxAdd(Matrix &mtx1, Matrix &mtx2){
 }
 
 void mtxMultiply(Matrix &mtx1, Matrix &mtx2){
+    Matrix outputMtx;
+    for (int i = 0; i < mtx1.mtx.size(); i++){
+        vector<string> row;
+        for (int j = 0; j < mtx1.mtx.size(); j++){
+            int sum = 0;
+            for (int k = 0; k < mtx1.mtx.size(); k++){
+                int mtx1int = stoi(mtx1.mtx[i][k]);
+                int mtx2int = stoi(mtx2.mtx[k][j]);
+                sum+= mtx1int*mtx2int;
+            }
+            row.push_back(to_string(sum));
+        }
+        outputMtx.mtx.push_back(row);
+    }
+    cout << "Matrix 1 and Matrix 2 multiplied together\n";
+    outputMtx.print();
 }
 
-void mtxDiagonalSum(Matrix &mtx1, Matrix &mtx2){
+void mtxDiagonalSum(Matrix &mtxz){
+    int maindiag = 0;
+    int seconddiag = 0;
+    for (int i = 0; i < mtxz.mtx.size(); i++) {
+        int mtxzint1 = stoi(mtxz.mtx[i][i]);
+        int mtxzint2 = stoi(mtxz.mtx[i][mtxz.mtx.size()-1-i]);
+        maindiag+=mtxzint1;
+        seconddiag+=mtxzint2;
+    }
+    cout << "Sum of main diagonal: " << maindiag << endl;
+    cout << "Sum of secondary diagonal: " << seconddiag << endl;
 }
 
 void mtxRowSwap(Matrix &mtxz, int row1, int row2){
@@ -102,14 +128,16 @@ int main(){
     cin >> selectedmtx;
     
     if (selectedmtx == "mtx1"){
-        mtxRowSwap(mtx1);
-        mtxColumnSwap(mtx1);
-        mtxUpdateRows(mtx1);
+        mtxDiagonalSum(mtx1);
+        //mtxRowSwap(mtx1);
+        //mtxColumnSwap(mtx1);
+        //mtxUpdateRows(mtx1);
     }
     else if (selectedmtx == "mtx2"){
-        mtxRowSwap(mtx2);
-        mtxColumnSwap(mtx2);
-        mtxUpdateRows(mtx2);
+        mtxDiagonalSum(mtx2);
+       // mtxRowSwap(mtx2);
+        //mtxColumnSwap(mtx2);
+        //mtxUpdateRows(mtx2);
     }
     else{
         cout << "You have entered an invalid matrix option";
