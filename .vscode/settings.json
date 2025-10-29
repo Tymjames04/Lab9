@@ -3,7 +3,8 @@
     "files.associations": {
         "iostream": "cpp",
         "vector": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "xstring": "cpp"
     },
     "editor.tokenColorCustomizations": {
         "comments": "",
