@@ -105,7 +105,7 @@ void mtxRowSwap(Matrix &mtxz, int row1, int row2){
     outputMtx.print();
 }
 
-void mtxColumnSwap(Matrix &mtxz, int col1, int col2){
+void mtxColSwap(Matrix &mtxz, int col1, int col2){
 }
 
 void mtxUpdateRows(Matrix &mtxz, int row, int column){
@@ -167,19 +167,33 @@ int main(){
     cin >> task5row1;
     cout << "What is the 2nd row you want to swap?: ";
     cin >> task5row2;
-    if (boundchecker){
-        if (task5mtx == "matrix1"){
-            mtxRowSwap(mtx1,task5row1,task5row2);
-        }else if (task5mtx == "matrix2"){
-            mtxRowSwap(mtx2,task5row1,task5row2);
-        }else{
-            cout << "You have entered something invalid for task 5";
-            return(1);
-        }
+    if (task5mtx == "matrix1"){
+        if (boundchecker(mtx1,task5row1,task5row2)) mtxRowSwap(mtx1,task5row1,task5row2);
+    }else if (task5mtx == "matrix2"){
+        if (boundchecker(mtx2,task5row1,task5row2)) mtxRowSwap(mtx2,task5row1,task5row2);
     }else{
-        cout << "You have supplied invalid bounds that are out of range!";
-    }   
+        cout << "You have entered something invalid for task 5";
+        return(1);
+    } 
 
+    //task6
+    string task6mtx;
+    int task6col1;
+    int task6col2;
+    cout << "Which matrix do you want to swap a column in? \"matrix1\" or \"matrix2\": ";
+    cin >> task6mtx;
+    cout << "What is the 1st column you want to swap?: ";
+    cin >> task6col1;
+    cout << "What is the 2nd column you want to swap?: ";
+    cin >> task6col2;
+    if (task6mtx == "matrix1"){
+        if (boundchecker(mtx1,task6col1,task6col2)) mtxColSwap(mtx1,task6col1,task6col2);
+    }else if (task6mtx == "matrix2"){
+        if (boundchecker(mtx2,task6col1,task6col2)) mtxColSwap(mtx2,task6col1,task6col2);
+    }else{
+        cout << "You have entered something invalid for task 6";
+        return(1);
+    }
     
 
 }
